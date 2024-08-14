@@ -1,0 +1,6 @@
+data
+uploads
+yarn.lock
+node_modules
+.chroma-data/*
+dumps/*

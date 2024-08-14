@@ -1,0 +1,94 @@
+version: "3.8"
+name: maci-generative-api
+services:
+  database:
+    # Cambiar a cualquier nombre para cada proyecto. 
+    container_name: ls-database-maci-generative-api
+    image: postgis/postgis:13-master
+    restart: always
+    # Required when running on platform other than amd64, like Apple M1/M2:
+    platform: linux/amd64
+    volumes:
+      - ./data/database:/var/lib/postgresql/data
+    networks:
+      - directus
+    ports:
+      # output:input para que puedan acceder desde fuera del contenedor en un puerto personalizado 
+      - 5489:5432
+    environment:
+      POSTGRES_USER: "directus"
+      POSTGRES_PASSWORD: "directus"
+      POSTGRES_DB: "directus"
+  
+  # cache:
+  #   image: redis:6
+  #   networks:
+  #     - directus
+
+  directus:
+    container_name: ls-directus-maci-generative-api
+    image: directus/directus:11.0.2
+    restart: always
+    ports:
+      # output:input para que puedan acceder desde fuera del contenedor en un puerto personalizado
+      - 8078:8055
+    volumes:
+      - ./uploads:/directus/uploads
+      # If you want to load extensions from the host
+      - ./extensions:/directus/extensions
+      - ./directus-config:/directus/directus-config
+    networks:
+      - directus
+    depends_on:
+      # - cache
+      - database
+      - chroma
+    environment:
+      CHOKIDAR_USEPOLLING: true
+      # Reemplazar key y value cuando quieran llevar a producción. Es colocar cadenas con el mismo patrón, para no comprometer su hash
+      KEY: "355d861b-5ea1-5996-9aa3-922530ec40b2"
+      SECRET: "7116487b-cda1-52c2-b5b5-c8022c45e264"
+
+      DB_CLIENT: "pg"
+      DB_HOST: "database"
+      DB_PORT: "5432"
+      DB_DATABASE: "directus"
+      DB_USER: "directus"
+      DB_PASSWORD: "directus"
+
+      CORS_ENABLED: "true"
+
+      # Activar cuando esté en producción porque en desarrollo les puede generar problemas testeando dado que es bien eficiente pero a la vez agresivo
+      CACHE_ENABLED: "false"
+      # CACHE_STORE: "redis"
+      # CACHE_REDIS: "redis://cache:6379"
+
+      # Estas credenciales deben cambiarlas para crear su aplicación o bien cambiarlo en el panel y posteriormente eliminar esta opción. Es para el build principalmente
+      ADMIN_EMAIL: "admin@example.com"
+      ADMIN_PASSWORD: "d1r3ctu5"
+
+      TELEMETRY: "false"
+
+      # Esto es muy importante tenerlo activo en desarrollo, para que vean los cambios en la medida que hacen modificaciones en el código
+      EXTENSIONS_AUTO_RELOAD: "true"
+     
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    restart: always
+    container_name: ls-chroma-maci-generative-api
+    environment:
+      - IS_PERSISTENT=TRUE
+      - ALLOW_RESET=TRUE
+    volumes:
+      - ./.chroma-data:/chroma/chroma/
+    ports:
+      # output:input para que puedan acceder desde fuera del contenedor en un puerto personalizado
+      - 7453:8000
+    networks:
+      - directus
+networks:
+  directus:
+
+volumes:
+  chroma-data:
+    driver: local
