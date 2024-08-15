@@ -1,0 +1,375 @@
+{
+	"info": {
+		"_postman_id": "c2fbc74e-7c58-4563-94df-efe4d98540aa",
+		"name": "Ejercicios taller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37693596",
+		"_collection_link": "https://restless-station-348488.postman.co/workspace/Team-Workspace~1642238f-7190-46c4-84c5-6aadd5dbb5b1/collection/37693596-c2fbc74e-7c58-4563-94df-efe4d98540aa?action=share&source=collection_link&creator=37693596"
+	},
+	"item": [
+		{
+			"name": "Accesos",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"d1r3ctu5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Solicitudes",
+			"item": [
+				{
+					"name": "chats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/chats?fields[]=date_created,id&fields[]=nombre,mensajes.id,mensajes.mensaje",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"chats"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "date_created,id"
+								},
+								{
+									"key": "fields[]",
+									"value": "nombre,mensajes.id,mensajes.mensaje"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes?fields[]=id&fields[]=mensaje&fields[]=date_created,date_updated&fields[]=chat.id,chat.nombre,chat.date_created&meta=*&limit=10&page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id",
+									"description": "campos identificadores"
+								},
+								{
+									"key": "fields[]",
+									"value": "mensaje",
+									"description": "campos de usuario"
+								},
+								{
+									"key": "fields[]",
+									"value": "date_created,date_updated",
+									"description": "campos coordenadas ts"
+								},
+								{
+									"key": "fields[]",
+									"value": "chat.id,chat.nombre,chat.date_created",
+									"description": "campos relacionales"
+								},
+								{
+									"key": "meta",
+									"value": "*"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "fields[]",
+									"value": "user_created.*",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensaje\": \"Ahora muéstrame destinos de islandia\",\r\n    \"chat\": \"5bae1726-75e0-453a-899a-5c9758b76c5a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/mensajes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensaje\": \"Ahora muéstrame destinos de indonesia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/mensajes/:id?fields[]=id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes",
+								":id"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "147b37f2-c9c7-4f55-b782-50aa0cff8aed"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enriquecimiento",
+			"item": [
+				{
+					"name": "destinos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/destinos?fields[]=id,nombre&fields[]=empresas.empresas_id.nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre"
+								},
+								{
+									"key": "fields[]",
+									"value": "empresas.empresas_id.nombre"
+								},
+								{
+									"key": "deep",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "empresas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/empresas?fields[]=id,nombre,destinos.*&fields[]=destinos.destinos_id.nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"empresas"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre,destinos.*"
+								},
+								{
+									"key": "fields[]",
+									"value": "destinos.destinos_id.nombre"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
