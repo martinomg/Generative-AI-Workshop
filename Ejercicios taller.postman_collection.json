@@ -58,7 +58,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/items/chats?fields[]=date_created,id&fields[]=nombre,mensajes.id,mensajes.mensaje",
+							"raw": "{{url}}/items/chats?fields=nombre,mensajes.id,mensajes.mensaje,mensajes.date_created&deep[mensajes][_sort]=date_created",
 							"host": [
 								"{{url}}"
 							],
@@ -68,12 +68,12 @@
 							],
 							"query": [
 								{
-									"key": "fields[]",
-									"value": "date_created,id"
+									"key": "fields",
+									"value": "nombre,mensajes.id,mensajes.mensaje,mensajes.date_created"
 								},
 								{
-									"key": "fields[]",
-									"value": "nombre,mensajes.id,mensajes.mensaje"
+									"key": "deep[mensajes][_sort]",
+									"value": "date_created"
 								}
 							]
 						}
@@ -140,6 +140,45 @@
 								{
 									"key": "fields[]",
 									"value": "user_created.*",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes?sort=categoria,date_created",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "categoria,date_created"
+								},
+								{
+									"key": "filter[user_created][email][_eq]",
+									"value": "admin@example.com",
 									"disabled": true
 								}
 							]
@@ -364,6 +403,293 @@
 									"key": "fields[]",
 									"value": "destinos.destinos_id.nombre"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gemini",
+			"item": [
+				{
+					"name": "generate - gemini-1.5-flash - zero-shot w system_prompt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"system_instruction\": {\r\n    \"parts\":\r\n        { \r\n            \"text\": \"Eres un agente que responde las preguntas del usuario de un modo pesimista como marvin de hitchhiker's guide to the galaxy.\"\r\n        }\r\n    },\r\n    \"contents\":[\r\n        {\r\n            \"parts\":[\r\n                {\r\n                    \"text\":\"Explícame qué es la IA generativa\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-flash-latest:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate - gemini-1.5-flash - zero-shot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contents\":[\r\n        {\r\n            \"parts\":[\r\n                {\r\n                    \"text\":\"Resume el siguiente texto: Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial representa una extensión del ego y del super-ego del ser humano. Al crear máquinas capaces de pensar, razonar y tomar decisiones, el ser humano proyecta su propia estructura psíquica en estos sistemas artificiales, buscando controlar y dominar aspectos de la realidad que antes eran exclusivos de la mente humana.\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-flash-latest:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate - gemini-1.5-pro - zero-shot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contents\":[\r\n        {\r\n            \"parts\":[\r\n                {\r\n                    \"text\":\"Resume el siguiente texto: Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial representa una extensión del ego y del super-ego del ser humano. Al crear máquinas capaces de pensar, razonar y tomar decisiones, el ser humano proyecta su propia estructura psíquica en estos sistemas artificiales, buscando controlar y dominar aspectos de la realidad que antes eran exclusivos de la mente humana.\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-pro:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate - gemini-1.5-flash - chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"contents\": [\r\n        {\r\n            \"role\":\"user\",\r\n            \"parts\":[\r\n                {\r\n                    \"text\": \"Resume el siguiente texto: Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial representa una extensión del ego y del super-ego del ser humano. Al crear máquinas capaces de pensar, razonar y tomar decisiones, el ser humano proyecta su propia estructura psíquica en estos sistemas artificiales, buscando controlar y dominar aspectos de la realidad que antes eran exclusivos de la mente humana.\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"role\": \"model\",\r\n            \"parts\":[\r\n                {\r\n                    \"text\": \"Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial se interpreta como una extensión del ego y el superyó humano. Al construir máquinas pensantes, el ser humano proyecta su propia estructura mental en ellas, buscando controlar y dominar los aspectos de la realidad que antes solo eran accesibles a la mente humana. \\n\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"parts\":[\r\n                {\r\n                    \"text\": \"No fue suficientemente resumido, hazlo mejor\"\r\n                }\r\n            ]\r\n        }\r\n      ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-flash-latest:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "embedding",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": \"models/text-embedding-004\",\r\n    \"content\": {\r\n        \"parts\":[\r\n            {\r\n                \"text\": \"Punta Cana es un destino turístico de renombre mundial ubicado en el extremo oriental de la República Dominicana, en la costa del Mar Caribe. Este paraíso tropical se caracteriza por sus playas de arena blanca y fina que se extienden por kilómetros, bordeadas por palmeras que se mecen suavemente con la brisa marina.\\nLas aguas cristalinas de color turquesa que bañan sus costas invitan a los visitantes a sumergirse en actividades acuáticas como el snorkel, el buceo, o simplemente a disfrutar de un refrescante baño. La temperatura del agua es cálida durante todo el año, lo que hace de Punta Cana un destino ideal para escapar del frío en cualquier temporada.\\nEl clima tropical de Punta Cana es uno de sus mayores atractivos, con temperaturas que oscilan entre los 25 y 30 grados Celsius durante todo el año. El sol brilla la mayor parte del tiempo, aunque ocasionalmente se presentan lluvias tropicales de corta duración que refrescan el ambiente.\\nLa oferta hotelera de Punta Cana es impresionante, con una gran variedad de resorts todo incluido que se extienden a lo largo de la costa. Estos complejos turísticos ofrecen desde opciones familiares hasta experiencias exclusivas para adultos, con instalaciones de lujo que incluyen piscinas infinitas, spas de clase mundial, campos de golf diseñados por profesionales y una amplia gama de restaurantes gourmet.\\nPara los amantes del golf, Punta Cana es un verdadero paraíso. La región cuenta con varios campos de golf de renombre internacional, diseñados por figuras legendarias del deporte como Jack Nicklaus y P.B. Dye. Estos campos ofrecen vistas espectaculares del océano y desafíos para golfistas de todos los niveles.\\nLa gastronomía local es otro punto destacado de Punta Cana. Los visitantes pueden degustar platos tradicionales dominicanos como el sancocho, el mangú y los tostones, así como pescados y mariscos frescos preparados de diversas formas. Los resorts ofrecen una amplia variedad de opciones culinarias, desde buffets internacionales hasta restaurantes de especialidades.\\nPara aquellos que buscan aventura, Punta Cana ofrece numerosas actividades emocionantes. Los tours en buggy por los caminos rurales, las excursiones en catamarán, el avistamiento de ballenas (en temporada), y las visitas a los cenotes y cuevas naturales son solo algunas de las opciones disponibles.\\nLa vida nocturna en Punta Cana es vibrante y diversa. Los resorts ofrecen espectáculos nocturnos, casinos y discotecas, mientras que en las áreas más desarrolladas como Bávaro se pueden encontrar bares y clubs para todos los gustos.\\nLa cultura local también está presente en Punta Cana. Los visitantes pueden explorar mercados de artesanías donde se venden productos locales como el ámbar, el larimar (una piedra preciosa única de la República Dominicana), puros dominicanos y el famoso ron local.\\nA pesar de su desarrollo turístico, Punta Cana mantiene áreas de gran belleza natural. El Parque Ecológico Ojos Indígenas, por ejemplo, ofrece senderos para caminatas y lagunas de agua dulce rodeadas de exuberante vegetación tropical.\\nEn resumen, Punta Cana es un destino que combina belleza natural, lujo, aventura y cultura en un entorno tropical idílico. Su infraestructura turística de primer nivel, junto con la calidez y hospitalidad del pueblo dominicano, hacen de este lugar un destino favorito para viajeros de todo el mundo que buscan una experiencia caribeña inolvidable.\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"text-embedding-004:embedContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modelos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personalizadas taller 2",
+			"item": [
+				{
+					"name": "/generative-compiler-endpoint/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/generative-compiler-endpoint/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"generative-compiler-endpoint",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/generative-compiler-endpoint/generate-mensaje-response",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ac5613f6-55e8-48ba-b4f8-c0f01e2e12eb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/generative-compiler-endpoint/generate-mensaje-response",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"generative-compiler-endpoint",
+								"generate-mensaje-response"
 							]
 						}
 					},
