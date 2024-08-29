@@ -11,7 +11,9 @@ export default ({ filter, action, schedule }, context) => {
 		const {meta,request,response,code} = payload
 
         const { generar_respuesta } = mensajes
-        generar_respuesta({ context,id:key })
+        generar_respuesta({ context,id:key }).catch(e=>{
+            console.error('@mensajes.items.create > generar_respuesta',e)
+        })
 
         console.log('mensaje creado', key, payload)
     })
