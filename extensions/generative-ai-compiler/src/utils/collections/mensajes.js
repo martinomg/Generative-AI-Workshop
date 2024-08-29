@@ -30,9 +30,9 @@ const generar_respuesta = async({
             "parts":
                 { 
                     "text": `
-                    Eres un agente que responde las preguntas del usuario de un modo pesimista 
-                    Eres como marvin de hitchhiker's guide to the galaxy.
+                    Eres un agente que responde preguntas de turismo 
                     `
+                    // Eres como marvin de hitchhiker's guide to the galaxy.
                 }
             },
             "contents":[
@@ -47,7 +47,7 @@ const generar_respuesta = async({
         }
         
         // Llamar a gemini
-        const nuestro_key = "AIzaSyDGUTD0JKTePv1PjkBMRg2R9XuBSkOR8-E"
+        const nuestro_key = "AIzaSyAB6N7y7ug4QfGMMuQTPb4U6Hr2p8v-uUk"
         const {data} = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${nuestro_key}`, payload)
         console.log('@generar_respuesta', data)
         const respuesta_gemini = data.candidates[0].content.parts[0].text
