@@ -56,7 +56,10 @@ services:
       DB_USER: "directus"
       DB_PASSWORD: "directus"
 
-      CORS_ENABLED: "true"
+      CORS_ENABLED: true
+      CORS_ORIGIN: true
+      CORS_METHODS: 'GET,POST,PATCH,DELETE'
+      CORS_CREDENTIALS: true
 
       # Activar cuando esté en producción porque en desarrollo les puede generar problemas testeando dado que es bien eficiente pero a la vez agresivo
       CACHE_ENABLED: "false"
