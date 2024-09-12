@@ -1,0 +1,1145 @@
+{
+	"info": {
+		"_postman_id": "c2fbc74e-7c58-4563-94df-efe4d98540aa",
+		"name": "Ejercicios taller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37693596",
+		"_collection_link": "https://restless-station-348488.postman.co/workspace/Team-Workspace~1642238f-7190-46c4-84c5-6aadd5dbb5b1/collection/37693596-c2fbc74e-7c58-4563-94df-efe4d98540aa?action=share&source=collection_link&creator=37693596"
+	},
+	"item": [
+		{
+			"name": "Accesos",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"d1r3ctu5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Solicitudes",
+			"item": [
+				{
+					"name": "chats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/chats?fields=nombre,mensajes.id,mensajes.mensaje,mensajes.date_created&deep[mensajes][_sort]=date_created&meta=*",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"chats"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "nombre,mensajes.id,mensajes.mensaje,mensajes.date_created"
+								},
+								{
+									"key": "deep[mensajes][_sort]",
+									"value": "date_created"
+								},
+								{
+									"key": "meta",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes?fields[]=id&fields[]=mensaje&fields[]=date_created,date_updated&fields[]=chat.id,chat.nombre,chat.date_created&meta=*&limit=10&page=1&filter[mensaje][_contains]=Dime",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id",
+									"description": "campos identificadores"
+								},
+								{
+									"key": "fields[]",
+									"value": "mensaje",
+									"description": "campos de usuario"
+								},
+								{
+									"key": "fields[]",
+									"value": "date_created,date_updated",
+									"description": "campos coordenadas ts"
+								},
+								{
+									"key": "fields[]",
+									"value": "chat.id,chat.nombre,chat.date_created",
+									"description": "campos relacionales"
+								},
+								{
+									"key": "meta",
+									"value": "*"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "fields[]",
+									"value": "user_created.*",
+									"disabled": true
+								},
+								{
+									"key": "filter[mensaje][_contains]",
+									"value": "Dime"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes?fields[]=id&fields[]=mensaje&fields[]=date_created,date_updated&fields[]=chat.id,chat.nombre,chat.date_created&meta=*&limit=10&page=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id",
+									"description": "campos identificadores"
+								},
+								{
+									"key": "fields[]",
+									"value": "mensaje",
+									"description": "campos de usuario"
+								},
+								{
+									"key": "fields[]",
+									"value": "date_created,date_updated",
+									"description": "campos coordenadas ts"
+								},
+								{
+									"key": "fields[]",
+									"value": "chat.id,chat.nombre,chat.date_created",
+									"description": "campos relacionales"
+								},
+								{
+									"key": "meta",
+									"value": "*"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "fields[]",
+									"value": "user_created.*",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							],
+							"query": [
+								{
+									"key": "filter[user_created][email][_eq]",
+									"value": "admin@example.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensaje\": \"Ahora muéstrame destinos de islandia\",\r\n    \"chat\": \"5bae1726-75e0-453a-899a-5c9758b76c5a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/mensajes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensaje\": \"Ahora muéstrame destinos de indonesia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/mensajes/:id?fields[]=id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes",
+								":id"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mensajes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/items/mensajes/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"mensajes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "147b37f2-c9c7-4f55-b782-50aa0cff8aed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enriquecimiento",
+			"item": [
+				{
+					"name": "destinos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/destinos?fields[]=id,nombre&fields[]=empresas.empresas_id.nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre"
+								},
+								{
+									"key": "fields[]",
+									"value": "empresas.empresas_id.nombre"
+								},
+								{
+									"key": "deep",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destinos Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/destinos?fields[]=id,nombre&fields[]=empresas.empresas_id.nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre"
+								},
+								{
+									"key": "fields[]",
+									"value": "empresas.empresas_id.nombre"
+								},
+								{
+									"key": "deep",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/destinos pendientes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/destinos?fields[]=id,nombre&limit=2&fields[]=actividades&filter[actividades][_null]=true&sort=-date_created",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								},
+								{
+									"key": "fields[]",
+									"value": "actividades"
+								},
+								{
+									"key": "filter[actividades][_null]",
+									"value": "true"
+								},
+								{
+									"key": "sort",
+									"value": "-date_created"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destinos Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"nombre\": \"Maldivas\",\r\n        \"descripcion\": \"Las Maldivas son un destino de ensueño conocido por sus aguas cristalinas y sus idílicas playas de arena blanca. Este archipiélago en el Océano Índico está compuesto por 26 atolones de coral, que albergan algunos de los resorts más lujosos del mundo. Las playas de las Maldivas son famosas por su arena fina y blanca, y el agua es tan clara que parece un cristal. Además, el vibrante ecosistema marino ofrece oportunidades excepcionales para practicar snorkel y buceo. La tranquilidad y la belleza natural de las Maldivas las convierten en el lugar perfecto para una escapada romántica o una relajante luna de miel.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Bora Bora, Polinesia Francesa\",\r\n        \"descripcion\": \"Bora Bora es una isla situada en el Pacífico Sur, conocida por sus lagunas turquesas y sus bungalows sobre el agua. Este destino es famoso por su paisaje de postal, con montañas verdes que se alzan majestuosamente sobre un mar azul brillante. Los bungalows sobre el agua ofrecen una experiencia única, permitiendo a los visitantes disfrutar de la belleza del océano y la vida marina directamente desde su habitación. Bora Bora es ideal para quienes buscan una escapada romántica, con opciones para relajarse en playas privadas o disfrutar de actividades acuáticas como el snorkel y el buceo en un entorno de ensueño.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Seychelles\",\r\n        \"descripcion\": \"Seychelles es un archipiélago situado en el Océano Índico, compuesto por 115 islas de impresionante belleza. Este destino es conocido por sus playas de arena blanca y aguas cristalinas, así como por sus exuberantes selvas tropicales y formaciones rocosas únicas. La isla de Praslin alberga la famosa playa de Anse Lazio, considerada una de las más bellas del mundo, mientras que La Digue es famosa por sus formaciones rocosas de granito. Seychelles ofrece una combinación perfecta de relajación en playas idílicas y exploración en la selva, con oportunidades para practicar snorkel, buceo y senderismo.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Islas Fiji\",\r\n        \"descripcion\": \"Las Islas Fiji son un destino tropical en el Pacífico Sur conocido por su hospitalidad y belleza natural. Compuestas por más de 300 islas, Fiji ofrece una amplia gama de experiencias para los visitantes, desde playas de arena blanca y aguas turquesas hasta exuberantes selvas tropicales. Las islas principales, Viti Levu y Vanua Levu, cuentan con lujosos resorts y actividades para todos los gustos, incluyendo snorkel, buceo y senderismo. La cálida bienvenida de los locales y la rica cultura de Fiji hacen de este destino un lugar ideal para unas vacaciones relajantes y culturales.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Islas Galápagos, Ecuador\",\r\n        \"descripcion\": \"Las Islas Galápagos son un archipiélago volcánico ubicado en el Océano Pacífico, conocido por su biodiversidad única y su importancia científica. Estas islas, que inspiraron las teorías de Charles Darwin sobre la evolución, ofrecen una experiencia única para los amantes de la naturaleza. Los visitantes pueden observar especies endémicas como las tortugas gigantes, los iguanas marinas y una gran variedad de aves. Además, las aguas cristalinas permiten practicar snorkel y buceo en hábitats marinos impresionantes. Las Islas Galápagos son un destino ideal para aquellos interesados en la ecología y la conservación, así como en la aventura y la exploración.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Santorini, Grecia\",\r\n        \"descripcion\": \"Santorini es una isla volcánica en el Mar Egeo, famosa por sus impresionantes vistas y su arquitectura distintiva. Las casas blancas con techos azules que caracterizan la isla ofrecen vistas panorámicas sobre el océano y el volcán en el centro de la caldera. Santorini es conocida por sus espectaculares atardeceres, que son un espectáculo imperdible para los visitantes. La isla también ofrece playas de arena negra y roja, así como oportunidades para disfrutar de la gastronomía griega y explorar sitios arqueológicos. Santorini combina la belleza natural con la cultura y la historia, creando un destino único para vacaciones románticas y relajantes.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Maui, Hawái, EE.UU.\",\r\n        \"descripcion\": \"Maui es una de las islas principales de Hawái y es conocida por sus paisajes variados y su belleza natural. La isla ofrece desde playas de arena dorada hasta selvas tropicales y montañas volcánicas. El Parque Nacional Haleakalā alberga el volcán dormido Haleakalā, que proporciona vistas impresionantes y la oportunidad de observar el amanecer desde la cima. La costa de Lahaina y Kaanapali es ideal para disfrutar de playas y actividades acuáticas, mientras que la carretera a Hana ofrece un viaje escénico a través de paisajes exuberantes y cascadas. Maui es perfecta para quienes buscan una mezcla de aventura y relajación en un entorno natural impresionante.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Zanzibar, Tanzania\",\r\n        \"descripcion\": \"Zanzibar es un archipiélago en la costa este de África, conocido por sus playas paradisíacas y su rica historia cultural. La isla principal, Unguja, ofrece playas de arena blanca y aguas cristalinas que son perfectas para nadar y practicar deportes acuáticos. La ciudad de Stone Town, declarada Patrimonio de la Humanidad por la UNESCO, es famosa por su arquitectura histórica y sus mercados vibrantes. Zanzibar también es conocida por sus especias y la oportunidad de realizar excursiones a plantaciones de especias. Con su combinación de playas idílicas, historia cultural y vibrante vida local, Zanzibar es un destino único para una escapada tropical.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Bali, Indonesia\",\r\n        \"descripcion\": \"Bali es una isla en Indonesia famosa por su belleza natural y su rica cultura. Conocida como la 'Isla de los Dioses', Bali ofrece una combinación de playas paradisíacas, templos antiguos y exuberantes paisajes montañosos. Las playas de Kuta y Seminyak son populares entre los turistas, mientras que Ubud ofrece una experiencia cultural más profunda con sus campos de arroz y galerías de arte. Bali también es conocida por sus impresionantes templos, como el Templo de Uluwatu, y sus vibrantes festivales. La isla es un destino ideal para quienes buscan una mezcla de relajación, cultura y aventura en un entorno tropical.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Cayo Coco, Cuba\",\r\n        \"descripcion\": \"Cayo Coco es una isla en el archipiélago Jardines del Rey, en Cuba, conocida por sus playas de arena blanca y aguas cristalinas. Este destino ofrece una experiencia de playa tranquila y relajante, con numerosos resorts todo incluido que proporcionan acceso directo a las playas. La isla también cuenta con una rica vida marina y oportunidades para practicar snorkel y buceo. Además, Cayo Coco es hogar de una gran variedad de aves y una vegetación tropical que la convierten en un destino atractivo tanto para el descanso como para la exploración natural.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Tenerife, Islas Canarias, España\",\r\n        \"descripcion\": \"Tenerife es la isla más grande del archipiélago de las Islas Canarias, en España, y ofrece una variedad de paisajes y actividades. Desde las playas de arena dorada y negra hasta el majestuoso Teide, el pico más alto de España, Tenerife combina belleza natural y oportunidades de aventura. El Parque Nacional del Teide es ideal para el senderismo y ofrece vistas panorámicas impresionantes. Las playas de la costa sur, como Playa de las Américas, son perfectas para relajarse, mientras que el norte de la isla ofrece un paisaje más verde y montañoso. Tenerife es un destino versátil que satisface tanto a quienes buscan relajación como a los amantes de la naturaleza.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Mauricio\",\r\n        \"descripcion\": \"Mauricio es una isla en el Océano Índico conocida por sus playas paradisíacas y su entorno natural diverso. Con sus arenas blancas, aguas turquesas y arrecifes de coral, Mauricio es un destino ideal para quienes buscan relajarse en un entorno tropical. La isla ofrece una amplia gama de actividades acuáticas, incluyendo snorkel, buceo y navegación. Además de sus playas, Mauricio cuenta con una rica cultura e historia, con influencias de diversas comunidades. Los visitantes pueden explorar el colorido mercado de Port Louis, disfrutar de la gastronomía local y descubrir la belleza del interior de la isla con sus montañas y cascadas.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Riviera Maya, México\",\r\n        \"descripcion\": \"La Riviera Maya es una región costera en la península de Yucatán, en México, conocida por sus playas de arena blanca y aguas cristalinas. Esta zona ofrece una combinación de resorts lujosos y sitios arqueológicos mayas, como Tulum y Cobá. La Riviera Maya también es famosa por sus cenotes, formaciones naturales de agua dulce que son ideales para nadar y bucear. Además, la región cuenta con una vibrante vida marina y oportunidades para practicar deportes acuáticos. Con su mezcla de belleza natural, cultura y actividades recreativas, la Riviera Maya es un destino atractivo tanto para quienes buscan relajación como para los aventureros.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Phuket, Tailandia\",\r\n        \"descripcion\": \"Phuket es la isla más grande de Tailandia y un popular destino turístico conocido por sus playas de arena blanca y su vibrante vida nocturna. La isla ofrece una amplia gama de actividades, desde relajarse en playas como Patong y Kata hasta explorar la cultura local en el casco antiguo de Phuket. Además, Phuket es un punto de partida ideal para explorar islas cercanas, como las Islas Phi Phi, que ofrecen paisajes impresionantes y excelentes oportunidades para el snorkel y el buceo. La mezcla de playas paradisíacas, cultura y entretenimiento hace de Phuket un destino versátil para todo tipo de viajeros.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Amalfi, Italia\",\r\n        \"descripcion\": \"La costa de Amalfi, en Italia, es famosa por su impresionante belleza y sus pintorescos pueblos costeros. Este destino ofrece vistas espectaculares del mar Mediterráneo y acantilados adornados con coloridas casas. Los pueblos de Amalfi, Positano y Ravello son conocidos por su encanto y su arquitectura única, con calles estrechas y empedradas que ofrecen vistas panorámicas. La región es ideal para disfrutar de la gastronomía italiana, explorar el paisaje costero y relajarse en playas de ensueño. La costa de Amalfi combina la belleza natural con la cultura y la historia, creando un destino perfecto para una escapada romántica o una aventura cultural.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Whitsunday Islands, Australia\",\r\n        \"descripcion\": \"Las Islas Whitsunday son un grupo de islas situadas en la Gran Barrera de Coral, en Australia, y son conocidas por sus playas de arena blanca y sus aguas cristalinas. La playa de Whitehaven, con su arena blanca y pura, es uno de los principales atractivos de la región. Las islas ofrecen una amplia gama de actividades acuáticas, incluyendo snorkel y buceo en los arrecifes de coral cercanos. Además, las Islas Whitsunday son un destino popular para realizar cruceros y explorar la belleza natural del área. Con su entorno tropical y su biodiversidad marina, las Islas Whitsunday son ideales para quienes buscan una escapada relajante y aventurera.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Cozumel, México\",\r\n        \"descripcion\": \"Cozumel es una isla en el Caribe mexicano, conocida por sus playas de arena blanca y sus impresionantes arrecifes de coral. Este destino ofrece excelentes oportunidades para el snorkel y el buceo, con una vibrante vida marina que atrae a los entusiastas de estas actividades. Además de sus playas, Cozumel cuenta con una rica cultura y una serie de sitios arqueológicos mayas cercanos, como San Gervasio. La isla también ofrece una variedad de resorts y restaurantes, así como actividades recreativas como el kayak y el paddleboarding. Con su combinación de belleza natural y opciones recreativas, Cozumel es un destino ideal para unas vacaciones tropicales.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Sardinia, Italia\",\r\n        \"descripcion\": \"Cerdeña es una isla italiana en el mar Mediterráneo, famosa por sus playas vírgenes y su entorno natural impresionante. La costa de Cerdeña ofrece una variedad de playas, desde calas escondidas hasta largas franjas de arena blanca. La región de Costa Esmeralda es particularmente conocida por su lujo y exclusividad, mientras que otras áreas, como la Costa del Sur, ofrecen una experiencia más tranquila y auténtica. Además de sus playas, Cerdeña cuenta con un paisaje montañoso, pueblos pintorescos y una rica historia cultural. Este destino es perfecto para quienes buscan una combinación de relax, naturaleza y cultura.\"\r\n    },\r\n    {\r\n        \"nombre\": \"El Nido, Filipinas\",\r\n        \"descripcion\": \"El Nido es un destino tropical en Palawan, Filipinas, conocido por sus impresionantes formaciones rocosas y sus lagunas cristalinas. La región ofrece una serie de islas y calas rodeadas por aguas turquesas, ideales para el snorkel y el buceo. Las formaciones de karst y las playas vírgenes crean un paisaje de ensueño, mientras que los recorridos en barco permiten explorar la belleza natural de la zona. El Nido es un lugar ideal para quienes buscan una escapada en un entorno natural y tranquilo, con la oportunidad de disfrutar de la biodiversidad marina y de paisajes espectaculares.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Komodo, Indonesia\",\r\n        \"descripcion\": \"La isla de Komodo es famosa por sus dragones de Komodo, pero también es conocida por sus paisajes naturales y sus playas exóticas. Situada en el Parque Nacional Komodo, esta isla ofrece una combinación de belleza natural y vida salvaje única. Los visitantes pueden explorar los hábitats de los dragones de Komodo, así como disfrutar de playas de arena blanca y aguas cristalinas. Además, la región es ideal para el buceo y el snorkel, con una rica biodiversidad marina y arrecifes de coral. Komodo es un destino perfecto para quienes buscan una experiencia de aventura y exploración en un entorno natural impresionante.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Vanuatu\",\r\n        \"descripcion\": \"Vanuatu es un archipiélago en el Pacífico Sur conocido por su belleza natural y su rica cultura. Las islas ofrecen playas de arena blanca, aguas cristalinas y un entorno tropical exuberante. La región es ideal para el snorkel y el buceo, con una vibrante vida marina y arrecifes de coral. Además, Vanuatu cuenta con una rica cultura indígena y oportunidades para explorar sitios arqueológicos y participar en festivales locales. Con su combinación de playas paradisíacas, actividades acuáticas y cultura, Vanuatu es un destino atractivo para quienes buscan una experiencia tropical única.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Bermudas\",\r\n        \"descripcion\": \"Las Bermudas son un grupo de islas en el Atlántico Norte, conocidas por sus playas de arena rosa y sus aguas cristalinas. Este destino ofrece un ambiente tropical y una mezcla de influencias británicas y americanas. Las playas, como Horseshoe Bay, son famosas por su arena rosa y sus aguas tranquilas, ideales para nadar y relajarse. Además de sus playas, Bermudas cuenta con una rica historia marítima, que se puede explorar en museos y sitios históricos. Las islas también ofrecen oportunidades para practicar deportes acuáticos, como el snorkel y el buceo. Con su belleza natural y su ambiente relajado, Bermudas es un destino perfecto para unas vacaciones en el paraíso.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Raroia, Polinesia Francesa\",\r\n        \"descripcion\": \"Raroia es una pequeña isla en la Polinesia Francesa, conocida por sus playas vírgenes y su entorno natural intacto. Este destino ofrece una experiencia auténtica y tranquila, con lagunas turquesas y arenas blancas que invitan a relajarse y disfrutar de la belleza del paisaje. Las aguas de Raroia son ideales para el snorkel y el buceo, con una rica vida marina y arrecifes de coral que explorar. La isla también es conocida por sus cálidos y acogedores habitantes, que brindan una experiencia cultural enriquecedora. Raroia es un destino perfecto para quienes buscan escapar del turismo masivo y disfrutar de un entorno natural paradisíaco.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Cabo Verde\",\r\n        \"descripcion\": \"Cabo Verde es un archipiélago situado en el Océano Atlántico, conocido por sus paisajes volcánicos y sus playas de arena dorada. Cada isla de Cabo Verde ofrece una experiencia única, desde las playas de Sal y Boa Vista hasta el paisaje montañoso de Santo Antão. Las islas ofrecen una combinación de playas vírgenes, montañas escénicas y una rica cultura local. Las actividades incluyen el senderismo en paisajes montañosos, el relax en playas de arena dorada y la exploración de la vibrante cultura caboverdiana. Con su diversidad de paisajes y cultura, Cabo Verde es un destino atractivo para quienes buscan una experiencia tropical única y variada.\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/destinos?fields[]=id,nombre&fields[]=empresas.empresas_id.nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre"
+								},
+								{
+									"key": "fields[]",
+									"value": "empresas.empresas_id.nombre"
+								},
+								{
+									"key": "deep",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/generative-compiler-endpoint/generar-nuevos-destinos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cantidad\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/generative-compiler-endpoint/generar-nuevos-destinos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"generative-compiler-endpoint",
+								"generar-nuevos-destinos"
+							],
+							"query": [
+								{
+									"key": "deep",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "empresas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAyM2ZlZjAwLWFmNWUtNDEwYy04MDVkLWU3ZjU3N2FmZDFlNSIsInJvbGUiOiI3ZTNkZjViNC05MmQxLTQ5OTAtOTQwOC1hNmQzMzVlZDhhYzMiLCJhcHBfYWNjZXNzIjp0cnVlLCJhZG1pbl9hY2Nlc3MiOnRydWUsImlhdCI6MTcyMzY3OTI0OCwiZXhwIjoxNzIzNjgwMTQ4LCJpc3MiOiJkaXJlY3R1cyJ9.PFsPO43MP8Qokv_22WGDSObvm9iwvYwr6hfwvCQXPws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/items/empresas?fields[]=id,nombre,destinos.*&fields[]=destinos.destinos_id.nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"empresas"
+							],
+							"query": [
+								{
+									"key": "fields[]",
+									"value": "id,nombre,destinos.*"
+								},
+								{
+									"key": "fields[]",
+									"value": "destinos.destinos_id.nombre"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destino",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actividades\": [\r\n    {\r\n        \"nombre\": \"Aurora Boreal\",\r\n        \"descripcion\": \"Reikiavik es uno de los mejores lugares del mundo para observar la aurora boreal, un fenómeno natural de luces danzantes en el cielo nocturno que se puede disfrutar durante los meses de invierno.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Laguna Azul\",\r\n        \"descripcion\": \"La Laguna Azul es un balneario geotérmico famoso por sus aguas cálidas y ricas en minerales. Es el lugar perfecto para relajarse y disfrutar de un baño rodeado de un impresionante paisaje volcánico.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Tour de glaciares\",\r\n        \"descripcion\": \"Desde Reikiavik, se pueden realizar excursiones a glaciares cercanos como el Vatnajökull, donde los visitantes pueden caminar sobre el hielo y explorar cuevas glaciares únicas.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Avistamiento de ballenas\",\r\n        \"descripcion\": \"Reikiavik ofrece salidas en barco para avistar ballenas en la bahía de Faxaflói, donde se pueden ver diferentes especies de ballenas, delfines y aves marinas.\"\r\n    },\r\n    {\r\n        \"nombre\": \"Visita al Círculo Dorado\",\r\n        \"descripcion\": \"El Círculo Dorado es una popular ruta turística desde Reikiavik que incluye paradas en el Parque Nacional Þingvellir, la cascada Gullfoss y el géiser Strokkur.\"\r\n    }\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/destinos/:id ",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos",
+								":id "
+							],
+							"variable": [
+								{
+									"key": "id ",
+									"value": "2d6a635e-326a-4a9a-a8f5-6ed413013763"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destino modo 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"keys\": [\"2d6a635e-326a-4a9a-a8f5-6ed413013763\"],\r\n    \"data\": {\r\n        \"actividades\": [\r\n            {\r\n                \"nombre\": \"Aurora Boreal\",\r\n                \"descripcion\": \"Reikiavik es uno de los mejores lugares del mundo para observar la aurora boreal, un fenómeno natural de luces danzantes en el cielo nocturno que se puede disfrutar durante los meses de invierno.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Laguna Azul\",\r\n                \"descripcion\": \"La Laguna Azul es un balneario geotérmico famoso por sus aguas cálidas y ricas en minerales. Es el lugar perfecto para relajarse y disfrutar de un baño rodeado de un impresionante paisaje volcánico.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Tour de glaciares\",\r\n                \"descripcion\": \"Desde Reikiavik, se pueden realizar excursiones a glaciares cercanos como el Vatnajökull, donde los visitantes pueden caminar sobre el hielo y explorar cuevas glaciares únicas.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Avistamiento de ballenas\",\r\n                \"descripcion\": \"Reikiavik ofrece salidas en barco para avistar ballenas en la bahía de Faxaflói, donde se pueden ver diferentes especies de ballenas, delfines y aves marinas.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Visita al Círculo Dorado\",\r\n                \"descripcion\": \"El Círculo Dorado es una popular ruta turística desde Reikiavik que incluye paradas en el Parque Nacional Þingvellir, la cascada Gullfoss y el géiser Strokkur.\"\r\n            }\r\n        ]\r\n    }\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/destinos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destino modo 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": \"2d6a635e-326a-4a9a-a8f5-6ed413013763\",\r\n        \"actividades\": [\r\n            {\r\n                \"nombre\": \"Aurora Boreal\",\r\n                \"descripcion\": \"Reikiavik es uno de los mejores lugares del mundo para observar la aurora boreal, un fenómeno natural de luces danzantes en el cielo nocturno que se puede disfrutar durante los meses de invierno.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Laguna Azul\",\r\n                \"descripcion\": \"La Laguna Azul es un balneario geotérmico famoso por sus aguas cálidas y ricas en minerales. Es el lugar perfecto para relajarse y disfrutar de un baño rodeado de un impresionante paisaje volcánico.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Tour de glaciares\",\r\n                \"descripcion\": \"Desde Reikiavik, se pueden realizar excursiones a glaciares cercanos como el Vatnajökull, donde los visitantes pueden caminar sobre el hielo y explorar cuevas glaciares únicas.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Avistamiento de ballenas\",\r\n                \"descripcion\": \"Reikiavik ofrece salidas en barco para avistar ballenas en la bahía de Faxaflói, donde se pueden ver diferentes especies de ballenas, delfines y aves marinas.\"\r\n            },\r\n            {\r\n                \"nombre\": \"Visita al Círculo Dorado\",\r\n                \"descripcion\": \"El Círculo Dorado es una popular ruta turística desde Reikiavik que incluye paradas en el Parque Nacional Þingvellir, la cascada Gullfoss y el géiser Strokkur.\"\r\n            }\r\n        ]\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/destinos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"destinos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actividades",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"destino\": \"2d6a635e-326a-4a9a-a8f5-6ed413013763\",\r\n        \"nombre\": \"Aurora Boreal\",\r\n        \"descripcion\": \"Reikiavik es uno de los mejores lugares del mundo para observar la aurora boreal, un fenómeno natural de luces danzantes en el cielo nocturno que se puede disfrutar durante los meses de invierno.\"\r\n    },\r\n    {\r\n        \"destino\": \"2d6a635e-326a-4a9a-a8f5-6ed413013763\",\r\n        \"nombre\": \"Laguna Azul\",\r\n        \"descripcion\": \"La Laguna Azul es un balneario geotérmico famoso por sus aguas cálidas y ricas en minerales. Es el lugar perfecto para relajarse y disfrutar de un baño rodeado de un impresionante paisaje volcánico.\"\r\n    },\r\n    {\r\n        \"destino\": \"2d6a635e-326a-4a9a-a8f5-6ed413013763\",\r\n        \"nombre\": \"Tour de glaciares\",\r\n        \"descripcion\": \"Desde Reikiavik, se pueden realizar excursiones a glaciares cercanos como el Vatnajökull, donde los visitantes pueden caminar sobre el hielo y explorar cuevas glaciares únicas.\"\r\n    },\r\n    {\r\n        \"destino\": \"2d6a635e-326a-4a9a-a8f5-6ed413013763\",\r\n        \"nombre\": \"Avistamiento de ballenas\",\r\n        \"descripcion\": \"Reikiavik ofrece salidas en barco para avistar ballenas en la bahía de Faxaflói, donde se pueden ver diferentes especies de ballenas, delfines y aves marinas.\"\r\n    },\r\n    {\r\n        \"destino\": \"2d6a635e-326a-4a9a-a8f5-6ed413013763\",\r\n        \"nombre\": \"Visita al Círculo Dorado\",\r\n        \"descripcion\": \"El Círculo Dorado es una popular ruta turística desde Reikiavik que incluye paradas en el Parque Nacional Þingvellir, la cascada Gullfoss y el géiser Strokkur.\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/items/actividades",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"items",
+								"actividades"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gemini",
+			"item": [
+				{
+					"name": "generate - gemini-1.5-flash - zero-shot w system_prompt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"system_instruction\": {\r\n    \"parts\":\r\n        { \r\n            \"text\": \"Eres un agente que responde las preguntas del usuario de un modo pesimista como marvin de hitchhiker's guide to the galaxy.\"\r\n        }\r\n    },\r\n    \"contents\":[\r\n        {\r\n            \"parts\":[\r\n                {\r\n                    \"text\":\"Explícame qué es la IA generativa\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-flash-latest:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate - gemini-1.5-flash - zero-shot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contents\":[\r\n        {\r\n            \"parts\":[\r\n                {\r\n                    \"text\":\"Resume el siguiente texto: Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial representa una extensión del ego y del super-ego del ser humano. Al crear máquinas capaces de pensar, razonar y tomar decisiones, el ser humano proyecta su propia estructura psíquica en estos sistemas artificiales, buscando controlar y dominar aspectos de la realidad que antes eran exclusivos de la mente humana.\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-flash-latest:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate - gemini-1.5-pro - zero-shot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"contents\":[\r\n        {\r\n            \"parts\":[\r\n                {\r\n                    \"text\":\"Resume el siguiente texto: Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial representa una extensión del ego y del super-ego del ser humano. Al crear máquinas capaces de pensar, razonar y tomar decisiones, el ser humano proyecta su propia estructura psíquica en estos sistemas artificiales, buscando controlar y dominar aspectos de la realidad que antes eran exclusivos de la mente humana.\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-pro:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "generate - gemini-1.5-flash - chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"contents\": [\r\n        {\r\n            \"role\":\"user\",\r\n            \"parts\":[\r\n                {\r\n                    \"text\": \"Resume el siguiente texto: Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial representa una extensión del ego y del super-ego del ser humano. Al crear máquinas capaces de pensar, razonar y tomar decisiones, el ser humano proyecta su propia estructura psíquica en estos sistemas artificiales, buscando controlar y dominar aspectos de la realidad que antes eran exclusivos de la mente humana.\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"role\": \"model\",\r\n            \"parts\":[\r\n                {\r\n                    \"text\": \"Desde la perspectiva psicoanalítica de Freud, la inteligencia artificial se interpreta como una extensión del ego y el superyó humano. Al construir máquinas pensantes, el ser humano proyecta su propia estructura mental en ellas, buscando controlar y dominar los aspectos de la realidad que antes solo eran accesibles a la mente humana. \\n\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"role\": \"user\",\r\n            \"parts\":[\r\n                {\r\n                    \"text\": \"No fue suficientemente resumido, hazlo mejor\"\r\n                }\r\n            ]\r\n        }\r\n      ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"gemini-1.5-flash-latest:generateContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "embedding",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"model\": \"models/text-embedding-004\",\r\n    \"content\": {\r\n        \"parts\":[\r\n            {\r\n                \"text\": \"Cabo Verde es un archipiélago situado en el Océano Atlántico, conocido por sus paisajes volcánicos y sus playas de arena dorada. Cada isla de Cabo Verde ofrece una experiencia única, desde las playas de Sal y Boa Vista hasta el paisaje montañoso de Santo Antão. Las islas ofrecen una combinación de playas vírgenes, montañas escénicas y una rica cultura local. Las actividades incluyen el senderismo en paisajes montañosos, el relax en playas de arena dorada y la exploración de la vibrante cultura caboverdiana. Con su diversidad de paisajes y cultura, Cabo Verde es un destino atractivo para quienes buscan una experiencia tropical única y variada.\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models",
+								"text-embedding-004:embedContent"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modelos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://generativelanguage.googleapis.com/v1beta/models?key={{geminitoken}}",
+							"protocol": "https",
+							"host": [
+								"generativelanguage",
+								"googleapis",
+								"com"
+							],
+							"path": [
+								"v1beta",
+								"models"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{geminitoken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Personalizadas taller 2",
+			"item": [
+				{
+					"name": "/generative-compiler-endpoint/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/generative-compiler-endpoint/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"generative-compiler-endpoint",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/generative-compiler-endpoint/generate-mensaje-response",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ac5613f6-55e8-48ba-b4f8-c0f01e2e12eb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/generative-compiler-endpoint/generate-mensaje-response",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"generative-compiler-endpoint",
+								"generate-mensaje-response"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
