@@ -32,7 +32,9 @@ const generar_respuesta = async({
 
     try {
 
-        const key_gemini = `AIzaSyDmqjeQh4gOunGVUrInN9uF9RgB0-3fOpc`
+        const {env} = context
+		const { GEMINI_KEY } = env
+        const key_gemini = GEMINI_KEY;
         const url_embedding_gemini = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${key_gemini}`
 
 
@@ -80,7 +82,7 @@ const generar_respuesta = async({
             }
         })
         
-    
+        const pdfToText = ``
        
 
         const payload = {
@@ -91,6 +93,11 @@ const generar_respuesta = async({
                     Eres un agente que responde preguntas de turismo utilizando una base de referencia de destinos que te interesa recomendar.
                     En base a la consulta del usuario se han encontrado las siguientes coincidencias:
                     ${JSON.stringify(mejores3candidatos)}
+
+
+                    A continuación te proveo el manual de mejores prácticas del ministerio de turismo.
+
+
                     `
                     // Eres como marvin de hitchhiker's guide to the galaxy.
                 }
@@ -107,9 +114,9 @@ const generar_respuesta = async({
         }
         
         // Llamar a gemini
-        const nuestro_key = "AIzaSyDmqjeQh4gOunGVUrInN9uF9RgB0-3fOpc"
+        const nuestro_key = GEMINI_KEY;
         const {data} = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${nuestro_key}`, payload)
-        console.log('@generar_respuesta', data)
+        // console.log('@generar_respuesta', data)
         const respuesta_gemini = data.candidates[0].content.parts[0].text
         // const respuesta_gemini = data['candidates'][0]['content']['parts'][0]['text']
 

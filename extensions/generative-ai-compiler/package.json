@@ -42,6 +42,11 @@
 		"@directus/extensions-sdk": "12.0.1"
 	},
 	"dependencies": {
-		"axios": "^1.7.4"
+		"ajv": "^8.17.1",
+		"axios": "^1.7.4",
+		"log-parsed-json": "^0.0.59",
+		"pdf-text-reader": "^5.1.0",
+		"pdf2json": "^3.1.4",
+		"text-from-pdf": "^1.1.2"
 	}
 }

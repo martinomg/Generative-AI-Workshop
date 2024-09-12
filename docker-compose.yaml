@@ -74,6 +74,7 @@ services:
 
       # Esto es muy importante tenerlo activo en desarrollo, para que vean los cambios en la medida que hacen modificaciones en el código
       EXTENSIONS_AUTO_RELOAD: true
+      GEMINI_KEY: "AIzaSyDWKMRsqB5E_3m6TUTfCMXwZkxwhjmhtZw"
      
   chroma:
     image: ghcr.io/chroma-core/chroma:latest

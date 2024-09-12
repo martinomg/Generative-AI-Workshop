@@ -1,6 +1,10 @@
 import mensajes from "../utils/collections/mensajes.js"
+import destinos from "../utils/collections/destinos.js";
+import validate_json_schema from "../utils/helpers/validate_json_schema.js";
 import axios from 'axios'
 
+// import {readPdfText} from 'pdf-text-reader';
+import { fileURLToPath } from 'url';
 
 const l2DistanceSquared = (vector1, vector2) => {
     if (vector1.length !== vector2.length) {
@@ -30,7 +34,9 @@ const generar_vector_destino = async({
 }) => {
     
 
-    const key_gemini = `AIzaSyDmqjeQh4gOunGVUrInN9uF9RgB0-3fOpc`
+    const {env} = context
+    const { GEMINI_KEY } = env
+    const key_gemini = GEMINI_KEY;
     const url_embedding_gemini = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${key_gemini}`
 
     try {
@@ -58,7 +64,7 @@ const generar_vector_destino = async({
             vector
         })
 
-        console.log('vector generado', vector)
+        // console.log('vector generado', vector)
 
 
     } catch (error) {
@@ -70,10 +76,127 @@ const generar_vector_destino = async({
 
 export default ({ filter, action, schedule }, context) => {
 
+
+    schedule('*/5 * * * * *', async()=> {
+
+        try {
+            const schema = {
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "title": "Generated schema for Root",
+                "type": "object",
+                "properties": {
+                    "title":{
+                        default: "asd"
+                    },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "destino_id": {
+                          "type": "string"
+                        },
+                        "descripcion": {
+                          "type": "string",
+                          "default": "Hola a todos"
+                        }
+                      },
+                      "required": [
+                        "destino_id",
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+            }
+    
+    
+            console.log('res', validate_json_schema(schema,
+                {
+                    data: [
+                        {
+                            destino_id: 'aaui',
+                        }
+                    ]
+                }
+            ).data)
+        } catch (error) {
+            console.error('@validate', error)   
+        }
+        
+
+    })
+
+
+    schedule('*/15 * * * * *', async()=> {
+
+        try {
+            // const {generar_activides_destinos_para_destinos_pendientes} = destinos
+            await generar_activides_destinos_para_destinos_pendientes({
+                context,
+                cantidad_destinos: 2,
+            })
+
+            console.log('generando destinos')
+            const { services, getSchema } = context
+            const { ItemsService } = services
+            const schema = await getSchema()
+            const DestinosService = new ItemsService('destinos', {
+                schema
+            })
+
+            const destinos_ids = await DestinosService.readByQuery({
+                limit: -1,
+                fields: ['id']
+            })
+            const destinos_totales = destinos_ids.length
+
+
+
+            const { generar_destinos } = destinos
+
+            if(destinos_totales < 200){
+                await generar_destinos({
+                    context,
+                    cantidad: 20
+                })
+            } 
+
+            if(destinos_totales >= 200){
+                console.log('destinos objetivos ya completados')
+            }
+            
+        } catch (error) {
+            
+        }
+    })
+
+    schedule('*/3 * * * * *', async()=> {
+
+
+        try {
+            // const pdfParser = new PDFParser();
+            // const schemasPath = fileURLToPath(new URL('./documentos/pdfturismo.pdf', import.meta.url));
+            // const text = await readPdfText({url: schemasPath});
+
+            // console.log('text', text)
+            // console.log('text')
+
+
+        } catch (error) {
+            console.log('error', error)
+        }
+
+        
+    })
     schedule('*/3 * * * * *', async()=> {
         const nuestrabusqueda = "Muéstrame un destino donde haya un archipiélago"
 
-        const key_gemini = `AIzaSyDmqjeQh4gOunGVUrInN9uF9RgB0-3fOpc`
+        const {env} = context
+		const { GEMINI_KEY } = env
+        const key_gemini = GEMINI_KEY;
         const url_embedding_gemini = `https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key=${key_gemini}`
 
         try {
@@ -166,6 +289,6 @@ export default ({ filter, action, schedule }, context) => {
             console.error('@mensajes.items.create > generar_respuesta',e)
         })
 
-        console.log('mensaje creado', key, payload)
+        // console.log('mensaje creado', key, payload)
     })
 }
